@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_ecommerce/bindings/bindingclass.dart';
+import 'package:flutter_ecommerce/bindings/productdetailbindings.dart';
 import 'package:flutter_ecommerce/controller/getproductscontroller.dart';
 import 'package:flutter_ecommerce/view/productdetailpage.dart';
 import 'view/homepage.dart';
@@ -17,17 +18,16 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       initialRoute: '/homepage',
-      initialBinding: BindingsClass(),
+      // initialBinding: BindingsClass(),
       getPages: [
         GetPage(
             name: '/homepage',
             page: () => const HomePage(),
             binding: BindingsClass()),
-        // GetPage(
-        //     name: '/productDescription',
-        //     page: () => ProductDetailPage(
-        //           productDescription: "dfsdf",
-        //         ))
+        GetPage(
+            name: '/productDescription',
+            page: () => ProductDetailPage(),
+            binding: BindingsClass()),
       ],
     );
   }

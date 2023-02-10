@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_ecommerce/helper/customtextbutton.dart';
 import 'package:flutter_ecommerce/helper/listtoaddproduct.dart';
-import 'package:flutter_ecommerce/model/addtocartmodel.dart';
 import 'package:flutter_ecommerce/utils/textdecoration.dart';
 import 'package:flutter_ecommerce/view/cartpage/cartcheckoutpage.dart';
+import 'package:flutter_ecommerce/view/orderplacedsuccessful.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import '../controller/addtocartcontroller.dart';
@@ -15,7 +15,7 @@ import 'package:badges/badges.dart' as badges;
 class ProductDetailPage extends GetView<AddToCartController> {
   String? productImage;
   String? productDescription;
-  double? productRate;
+  dynamic productRate;
   int? id;
   String? productName;
   ProductDetailPage(
@@ -88,17 +88,56 @@ class ProductDetailPage extends GetView<AddToCartController> {
                   style: TextDecoration()
                       .customFont(FontWeight.w500, fontSize: 22.0)),
               SizedBox(height: MediaQuery.of(context).size.height * 0.03),
-              InkWell(
+              GestureDetector(
                   onTap: () {
-                    controller.addToCartButton(
-                        productName, id, productRate, productImage);
+                    controller.addToCartButton(productName.obs, id.obs,
+                        productRate, productImage.obs, 1.obs, productRate);
                   },
                   child: CustomTextButton(
                       customColor: ColorCode.addToCart,
                       text: Constants.addToCart)),
               SizedBox(height: MediaQuery.of(context).size.height * 0.02),
               InkWell(
-                  onTap: () {},
+                  onTap: () {
+                    showModalBottomSheet(
+                        context: context,
+                        builder: (context) {
+                          return Container(
+                            height: MediaQuery.of(context).size.height * 0.2,
+                            width: MediaQuery.of(context).size.width,
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                SizedBox(
+                                  width: MediaQuery.of(context).size.width,
+                                  child: TextButton(
+                                      onPressed: () {
+                                        ListToAddProduct().clearingCartList();
+                                      },
+                                      child: Text(
+                                        Constants.cash,
+                                        style: TextDecoration().customFont(
+                                            FontWeight.w700,
+                                            color: ColorCode.appBarColor),
+                                      )),
+                                ),
+                                SizedBox(
+                                  width: MediaQuery.of(context).size.width,
+                                  child: TextButton(
+                                      onPressed: () {},
+                                      child: Text(
+                                        Constants.card,
+                                        style: TextDecoration().customFont(
+                                            FontWeight.w700,
+                                            color: ColorCode.appBarColor),
+                                      )),
+                                )
+                              ],
+                            ),
+                          );
+                        });
+                  },
                   child: CustomTextButton(
                       customColor: ColorCode.buyNow, text: Constants.buyNow)),
             ],

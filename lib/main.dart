@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_ecommerce/bindings/bindingclass.dart';
-import 'package:flutter_ecommerce/bindings/productdetailbindings.dart';
-import 'package:flutter_ecommerce/controller/getproductscontroller.dart';
+import 'package:flutter_ecommerce/view/cartpage/cartcheckoutpage.dart';
 import 'package:flutter_ecommerce/view/productdetailpage.dart';
 import 'view/homepage.dart';
 import 'package:get/get.dart';
@@ -28,6 +27,10 @@ class MyApp extends StatelessWidget {
             name: '/productDescription',
             page: () => ProductDetailPage(),
             binding: BindingsClass()),
+        GetPage(
+            name: '/productDetail',
+            page: () => const CheckoutPage(),
+            binding: BindingsClass())
       ],
     );
   }

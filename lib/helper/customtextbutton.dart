@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_ecommerce/utils/colorcode.dart';
 import 'package:flutter_ecommerce/utils/textdecoration.dart';
-import '../utils/constants.dart';
 
+// ignore: must_be_immutable
 class CustomTextButton extends StatelessWidget {
   Color customColor;
   String text;
@@ -17,7 +16,10 @@ class CustomTextButton extends StatelessWidget {
       decoration: BoxDecoration(
           color: customColor, borderRadius: BorderRadius.circular(25.0)),
       child: Center(
-        child: Text(text, style: TextDecoration().customFont(FontWeight.w400)),
+        child: Text(text,
+            style: TextDecoration().customFont(
+              FontWeight.w600,
+            )),
       ),
     );
   }

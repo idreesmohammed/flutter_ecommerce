@@ -27,10 +27,12 @@ class HomePage extends GetView<GetProducts> {
               badgeAnimation: const badges.BadgeAnimation.fade(),
               position: badges.BadgePosition.topEnd(top: 1, end: 8),
               child: IconButton(
-                icon: FaIcon(FontAwesomeIcons.cartShopping),
+                icon: const FaIcon(FontAwesomeIcons.cartShopping),
                 onPressed: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => CheckoutPage()));
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const CheckoutPage()));
                 },
               ),
             ),

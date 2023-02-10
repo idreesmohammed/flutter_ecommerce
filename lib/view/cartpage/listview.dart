@@ -5,12 +5,12 @@ import 'package:get/get.dart';
 import '../../helper/listtoaddproduct.dart';
 import '../../utils/colorcode.dart';
 
-class ListViewClass extends StatelessWidget {
-  const ListViewClass({Key? key}) : super(key: key);
+class ListViewClass extends GetView<ListToAddProduct> {
+  const ListViewClass({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
+    return Obx(() => ListView.builder(
         itemCount: ListToAddProduct.productList.length,
         itemBuilder: (BuildContext context, index) {
           return Padding(
@@ -20,7 +20,7 @@ class ListViewClass extends StatelessWidget {
               color: Colors.white60,
               borderRadius: const BorderRadius.all(Radius.circular(20.0)),
               child: Container(
-                height: MediaQuery.of(context).size.height * 0.13,
+                height: MediaQuery.of(context).size.height * 0.15,
                 width: MediaQuery.of(context).size.width * 0.85,
                 decoration: const BoxDecoration(
                     color: Colors.white60,
@@ -56,46 +56,56 @@ class ListViewClass extends StatelessWidget {
                         ],
                       ),
                     ),
-                    Obx(() => SizedBox(
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.center,
+                    SizedBox(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Row(
                             children: [
-                              Row(
-                                children: [
-                                  IconButton(
-                                      onPressed: () {
-                                        ListToAddProduct().decrementCounter();
-                                      },
-                                      icon:
-                                          FaIcon(FontAwesomeIcons.circleMinus)),
-                                  Text(
-                                    ListToAddProduct.productQty.toString(),
-                                    style: TextDecoration()
-                                        .customFont(FontWeight.w600),
-                                  ),
-                                  IconButton(
-                                      onPressed: () {
-                                        ListToAddProduct().incrementCounter();
-                                      },
-                                      icon: FaIcon(FontAwesomeIcons.circlePlus))
-                                ],
+                              IconButton(
+                                  onPressed: () {
+                                    ListToAddProduct()
+                                        .decrementCounter(index, context);
+                                  },
+                                  icon: const FaIcon(
+                                      FontAwesomeIcons.circleMinus)),
+                              Obx(
+                                () => Text(
+                                  ListToAddProduct.productList[index].quantity
+                                      .toString(),
+                                  style: TextDecoration()
+                                      .customFont(FontWeight.w600),
+                                ),
                               ),
-                              Text(
-                                "\$${ListToAddProduct().productTotalQuantity(ListToAddProduct.productList[index].productPrice)}"
+                              IconButton(
+                                  onPressed: () {
+                                    ListToAddProduct().incrementCounter(index);
+                                  },
+                                  icon:
+                                      const FaIcon(FontAwesomeIcons.circlePlus))
+                            ],
+                          ),
+                          Obx(() => Text(
+                                "\$${ListToAddProduct().productTotalQuantityPrice(ListToAddProduct.productList[index].productPrice, ListToAddProduct.productList[index].quantity.toString())}"
                                     .toString(),
                                 style: TextDecoration().customFont(
                                     FontWeight.w600,
                                     color: ColorCode.blueGrey),
-                              )
-                            ],
-                          ),
-                        ))
+                              )),
+                          IconButton(
+                              onPressed: () {
+                                ListToAddProduct().removingIndex(index);
+                              },
+                              icon: const FaIcon(FontAwesomeIcons.trash))
+                        ],
+                      ),
+                    )
                   ],
                 ),
               ),
             ),
           );
-        });
+        }));
   }
 }

@@ -44,7 +44,7 @@ class ListToAddProduct extends GetxController {
 
       /// string to double
       /// assign int to total product value
-      productList[index].fullCartPrice = secondParse * (firstParse);
+
       //
       // productList[index].fullCartPrice =
       //     productList.map((element) => element.productPrice!).toList().add();
@@ -59,7 +59,8 @@ class ListToAddProduct extends GetxController {
 
       // productList[index].fullCartPrice = productList[index].quantity * productList[index].productPrice - 1 ;
 
-      return productList[index].quantity++;
+      productList[index].quantity++;
+      productList[index].fullCartPrice = secondParse * (firstParse + 1);
     }
   }
 
@@ -75,7 +76,36 @@ class ListToAddProduct extends GetxController {
 
   decrementCounter(index, context) {
     if (productList[index].quantity > 1) {
-      return productList[index].quantity--;
+      final firstParse =
+          int.parse(productList[index].quantity.toString()).toDouble();
+      print("$firstParse first parse");
+
+      ///parsing int to double
+      print("${productList[index].productPrice.runtimeType} individual price");
+
+      final secondParse =
+          double.parse(productList[index].productPrice).toDouble();
+      print("$secondParse second parse");
+
+      /// string to double
+      /// assign int to total product value
+
+      //
+      // productList[index].fullCartPrice =
+      //     productList.map((element) => element.productPrice!).toList().add();
+
+      //     double.parse(productList[index].productPrice).toInt().round();
+      // value!.value = total * productList[index].quantity.value.round() - 1;
+      // print('${value.value.obs.runtimeType} hello');
+      // productList[index].quantity.ref
+      // productList[index].totalPrice =
+      //     (productList[index].quantity * (productList[index].productPrice))
+      //         .toDouble() as RxDouble?;
+
+      // productList[index].fullCartPrice = productList[index].quantity * productList[index].productPrice - 1 ;
+
+      productList[index].quantity--;
+      productList[index].fullCartPrice = secondParse * (firstParse - 1);
     } else if (productList[index].quantity == 1) {
       return Get.defaultDialog(
           onCancel: () {},
@@ -97,16 +127,17 @@ class ListToAddProduct extends GetxController {
   }
 
   totalCartAmount() {
-    RxInt sum = 0.obs;
+    RxDouble sum = 0.0.obs;
     // for (int i = 0; i < productList.length; i++) {
     //   sum = ((double.parse(productList[i].productPrice).round() *
     //       (productList[i].quantity.value)))
     //       .obs as RxInt;
     // }
     for (int i = 0; i < productList.length; i++) {
-      sum = sum + (productList[i].fullCartPrice).round();
+      print((productList[i].fullCartPrice).round().runtimeType);
+      sum.value = sum.value + (productList[i].fullCartPrice);
     }
     print(sum);
-    return sum;
+    return sum.value;
   }
 }

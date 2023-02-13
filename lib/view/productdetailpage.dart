@@ -29,6 +29,7 @@ class ProductDetailPage extends GetView<AddToCartController> {
 
   @override
   Widget build(BuildContext context) {
+    dynamic productTotalPrice = productRate;
     return Obx(() => Scaffold(
           appBar: AppBar(
             backgroundColor: ColorCode.appBarColor,
@@ -90,8 +91,13 @@ class ProductDetailPage extends GetView<AddToCartController> {
               SizedBox(height: MediaQuery.of(context).size.height * 0.03),
               GestureDetector(
                   onTap: () {
-                    controller.addToCartButton(productName.obs, id.obs,
-                        productRate, productImage.obs, 1.obs, productRate);
+                    controller.addToCartButton(
+                        productName.obs,
+                        id.obs,
+                        productRate,
+                        productImage.obs,
+                        1.obs,
+                        productTotalPrice);
                   },
                   child: CustomTextButton(
                       customColor: ColorCode.addToCart,

@@ -62,82 +62,86 @@ class CheckoutPage extends GetView<ListToAddProduct> {
                                 const EdgeInsets.symmetric(horizontal: 10.0),
                             height: MediaQuery.of(context).size.height * 0.08,
                             color: Colors.grey,
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                Text(ListToAddProduct()
-                                    .totalCartAmount()
-                                    .toString()),
-                                IconButton(
-                                  onPressed: () {
-                                    showModalBottomSheet(
-                                        context: context,
-                                        builder: (context) {
-                                          return SizedBox(
-                                            height: MediaQuery.of(context)
+                            child: Obx(() => Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    Text(
+                                        "Total Amount: ${ListToAddProduct().totalCartAmount().round().toString()}"),
+                                    IconButton(
+                                      onPressed: () {
+                                        showModalBottomSheet(
+                                            context: context,
+                                            builder: (context) {
+                                              return SizedBox(
+                                                height: MediaQuery.of(context)
+                                                        .size
+                                                        .height *
+                                                    0.2,
+                                                width: MediaQuery.of(context)
                                                     .size
-                                                    .height *
-                                                0.2,
-                                            width: MediaQuery.of(context)
-                                                .size
-                                                .width,
-                                            child: Column(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.start,
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                                SizedBox(
-                                                  width: MediaQuery.of(context)
-                                                      .size
-                                                      .width,
-                                                  child: TextButton(
-                                                      onPressed: () {
-                                                        ListToAddProduct()
-                                                            .clearingCartList();
-                                                      },
-                                                      child: Text(
-                                                        Constants.cash,
-                                                        style: TextDecoration()
-                                                            .customFont(
-                                                                FontWeight.w700,
-                                                                color: ColorCode
-                                                                    .appBarColor),
-                                                      )),
+                                                    .width,
+                                                child: Column(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.start,
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: [
+                                                    SizedBox(
+                                                      width:
+                                                          MediaQuery.of(context)
+                                                              .size
+                                                              .width,
+                                                      child: TextButton(
+                                                          onPressed: () {
+                                                            ListToAddProduct()
+                                                                .clearingCartList();
+                                                          },
+                                                          child: Text(
+                                                            Constants.cash,
+                                                            style: TextDecoration()
+                                                                .customFont(
+                                                                    FontWeight
+                                                                        .w700,
+                                                                    color: ColorCode
+                                                                        .appBarColor),
+                                                          )),
+                                                    ),
+                                                    SizedBox(
+                                                      width:
+                                                          MediaQuery.of(context)
+                                                              .size
+                                                              .width,
+                                                      child: TextButton(
+                                                          onPressed: () {},
+                                                          child: Text(
+                                                            Constants.card,
+                                                            style: TextDecoration()
+                                                                .customFont(
+                                                                    FontWeight
+                                                                        .w700,
+                                                                    color: ColorCode
+                                                                        .appBarColor),
+                                                          )),
+                                                    )
+                                                  ],
                                                 ),
-                                                SizedBox(
-                                                  width: MediaQuery.of(context)
-                                                      .size
-                                                      .width,
-                                                  child: TextButton(
-                                                      onPressed: () {},
-                                                      child: Text(
-                                                        Constants.card,
-                                                        style: TextDecoration()
-                                                            .customFont(
-                                                                FontWeight.w700,
-                                                                color: ColorCode
-                                                                    .appBarColor),
-                                                      )),
-                                                )
-                                              ],
-                                            ),
-                                          );
-                                        });
-                                  },
-                                  icon: Container(
-                                    decoration: BoxDecoration(
-                                        color: ColorCode.blue,
-                                        borderRadius:
-                                            BorderRadius.circular(20.0)),
-                                    child: const Center(
-                                        child: FaIcon(
-                                            FontAwesomeIcons.arrowRight)),
-                                  ),
-                                )
-                              ],
-                            ),
+                                              );
+                                            });
+                                      },
+                                      icon: Container(
+                                        decoration: BoxDecoration(
+                                            color: ColorCode.blue,
+                                            borderRadius:
+                                                BorderRadius.circular(20.0)),
+                                        child: const Center(
+                                            child: FaIcon(
+                                                FontAwesomeIcons.arrowRight)),
+                                      ),
+                                    )
+                                  ],
+                                )),
                           )
                         ],
                       )))
